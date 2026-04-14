@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>saxi stream input</title>
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,700,900" rel="stylesheet">
+  </head>
+  <body>
+    <main>
+      <h1>Stream Drawing Input</h1>
+      <p>Open saxi in one tab (<code>/</code>) and this page in another (<code>/stream-input</code>). This canvas follows saxi paper size and streams centerline SVG.</p>
+      <div class="badges">
+        <span class="badge" id="connectionBadge">socket: connecting</span>
+        <span class="badge" id="paperBadge">paper: 210 x 297 mm</span>
+        <span class="badge" id="brushBadge">brush: round 1.6mm</span>
+      </div>
+      <div class="grid">
+        <section class="panel">
+          <div class="row">
+            <button id="undoBtn" type="button">Undo</button>
+            <button id="clearBtn" class="warn" type="button">Clear</button>
+            <button id="streamBtn" class="primary" type="button">Stream</button>
+          </div>
+
+          <div class="row tight">
+            <label><input id="autoStream" type="checkbox" /> Auto stream</label>
+            <label><input id="showGrid" type="checkbox" checked /> Show grid</label>
+            <label><input id="snapGrid" type="checkbox" /> Snap to grid</label>
+          </div>
+
+          <hr />
+
+          <div class="row">
+            <label for="brushType">Brush</label>
+            <select id="brushType">
+              <option value="round">Round</option>
+              <option value="flat">Flat nib</option>
+            </select>
+          </div>
+          <div class="row" id="roundRow">
+            <label for="roundSize">Round size</label>
+            <input id="roundSize" type="range" min="0.4" max="8" step="0.1" value="1.6" />
+            <span id="roundSizeValue" class="small">1.6 mm</span>
+          </div>
+          <div id="flatControls" style="display:none;">
+            <div class="row">
+              <label for="flatWidth">Flat width</label>
+              <input id="flatWidth" type="range" min="0.6" max="12" step="0.1" value="3.2" />
+              <span id="flatWidthValue" class="small">3.2 mm</span>
+            </div>
+            <div class="row">
+              <label for="flatAngle">Nib angle</label>
+              <input id="flatAngle" type="range" min="0" max="180" step="1" value="40" />
+              <span id="flatAngleValue" class="small">40 deg</span>
+            </div>
+          </div>
+
+          <hr />
+
+          <div class="row">
+            <label for="streamline">Streamline</label>
+            <input id="streamline" type="range" min="0" max="1" step="0.01" value="0.45" />
+            <span id="streamlineValue" class="small">0.45</span>
+          </div>
+          <div class="row">
+            <label for="smoothing">Smoothing</label>
+            <input id="smoothing" type="range" min="0" max="1" step="0.01" value="0.25" />
+            <span id="smoothingValue" class="small">0.25</span>
+          </div>
+          <div class="row">
+            <label for="minDistance">Min distance</label>
+            <input id="minDistance" type="range" min="0.1" max="5" step="0.1" value="0.6" />
+            <span id="minDistanceValue" class="small">0.6 mm</span>
+          </div>
+
+          <p id="status" class="status">Connecting...</p>
+          <p class="small">Grid: minor 5mm, major 25mm. Margin guide follows saxi margin.</p>
+        </section>
+
+        <section class="canvas-wrap">
+          <canvas id="canvas"></canvas>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

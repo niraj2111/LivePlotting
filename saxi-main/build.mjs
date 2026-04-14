@@ -5,7 +5,7 @@ import { build, context } from "esbuild";
 import inlineWorker from "esbuild-plugin-inline-worker";
 
 const buildOptions = {
-  entryPoints: ["src/ui.tsx", "src/background-planner.ts"],
+  entryPoints: ["src/ui.tsx", "src/background-planner.ts", "src/stream-input.js"],
   bundle: true,
   platform: "browser",
   target: "es2022",
@@ -28,6 +28,12 @@ const buildOptions = {
           entryPoints: ["src/ui.tsx"],
           filename: "index.html",
           htmlTemplate: "src/index.html",
+          scriptLoading: "defer",
+        },
+        {
+          entryPoints: ["src/stream-input.js"],
+          filename: "stream-input.html",
+          htmlTemplate: "src/stream-input.html",
           scriptLoading: "defer",
         },
       ],
