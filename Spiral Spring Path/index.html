@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Spiral Spring Path</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tweakpane@3.1.10/dist/tweakpane.min.css"
+    />
+    <style>
+      :root {
+        --panel: 380px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        display: grid;
+        grid-template-columns: var(--panel) 1fr;
+        height: 100vh;
+        background: #101114;
+        color: #eceff4;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      aside {
+        background: #151821;
+        border-right: 1px solid #232734;
+        padding: 12px;
+        overflow: auto;
+      }
+
+      main {
+        display: grid;
+      }
+
+      #wrap {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        place-items: center;
+        overflow: auto;
+        padding: 12px;
+        touch-action: none;
+      }
+
+      .row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+      }
+
+      .btn {
+        display: inline-block;
+        background: #232734;
+        border: 1px solid #313746;
+        color: #eceff4;
+        padding: 8px 12px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 14px;
+        user-select: none;
+      }
+
+      .btn:active {
+        transform: translateY(1px);
+      }
+
+      .hint {
+        font-size: 12px;
+        line-height: 1.45;
+        color: #b9c0cf;
+        margin-top: 10px;
+      }
+
+      code {
+        color: #d9e1f0;
+      }
+
+      ul {
+        padding-left: 18px;
+        margin: 8px 0 0;
+      }
+    </style>
+  </head>
+  <body>
+    <aside>
+      <div id="pane"></div>
+
+      <div class="row">
+        <button id="undoBtn" class="btn">Undo Point</button>
+        <button id="clearBtn" class="btn">Clear Spine</button>
+        <button id="svgBtn" class="btn">Export SVG</button>
+        <button id="spineSvgBtn" class="btn">Export Spine SVG</button>
+      </div>
+
+      <div class="hint">
+        Notes:
+        <ul>
+          <li>Click on the canvas to place snapped spine points.</li>
+          <li>Press <code>N</code> to start a new spine without clearing the current one.</li>
+          <li>Press <code>M</code> to enter multi-select mode. Drag a box to select anchors.</li>
+          <li>Hold <code>Shift</code> and click anchors to add or remove them from the selection.</li>
+          <li>Use arrow keys to move selected anchors by one grid unit.</li>
+          <li>Use <code>Base Grid</code> to switch square, hexagonal, or slanted cursive grids.</li>
+          <li>All geometric controls are in millimeters.</li>
+          <li><code>Zoom</code> and <code>Fit View</code> only affect the preview.</li>
+          <li>The spring is generated as a coiled path around the spine polyline.</li>
+        </ul>
+      </div>
+    </aside>
+
+    <main>
+      <div id="wrap"></div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.3/lib/p5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tweakpane@3.1.10/dist/tweakpane.min.js"></script>
+    <script src="./sketch.js"></script>
+  </body>
+</html>

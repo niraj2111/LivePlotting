@@ -8,20 +8,33 @@
   </head>
   <body>
     <main>
-      <h1>Stream Drawing Input</h1>
-      <p>Open saxi in one tab (<code>/</code>) and this page in another (<code>/stream-input</code>). This canvas follows saxi paper size and streams centerline SVG.</p>
-      <div class="badges">
-        <span class="badge" id="connectionBadge">socket: connecting</span>
-        <span class="badge" id="paperBadge">paper: 210 x 297 mm</span>
-        <span class="badge" id="brushBadge">brush: round 1.6mm</span>
-      </div>
-      <div class="grid">
-        <section class="panel">
+      <header class="topbar">
+        <div>
+          <h1>Stream Drawing Input</h1>
+          <div class="badges">
+            <span class="badge" id="connectionBadge">socket: connecting</span>
+            <span class="badge" id="paperBadge">paper: 210 x 297 mm</span>
+            <span class="badge" id="brushBadge">brush: round 1.6mm</span>
+            <span class="badge" id="selectedBadge">selected: 0</span>
+          </div>
+        </div>
+        <button id="menuToggle" type="button" aria-controls="controlsPanel" aria-expanded="true">Menu</button>
+      </header>
+
+      <div class="workspace">
+        <section class="panel is-open" id="controlsPanel">
           <div class="row">
             <button id="undoBtn" type="button">Undo</button>
             <button id="clearBtn" class="warn" type="button">Clear</button>
             <button id="streamBtn" class="primary" type="button">Stream</button>
           </div>
+
+          <div class="row segmented" role="group" aria-label="Drawing tools">
+            <button id="drawTool" class="tool is-active" type="button">Draw</button>
+            <button id="lassoTool" class="tool" type="button">Lasso</button>
+            <button id="transformTool" class="tool" type="button">Transform</button>
+          </div>
+          <p class="small">Lasso selects complete strokes. Transform selected strokes with the box handles.</p>
 
           <div class="row tight">
             <label><input id="autoStream" type="checkbox" /> Auto stream</label>
@@ -81,6 +94,11 @@
         <section class="canvas-wrap">
           <canvas id="canvas"></canvas>
         </section>
+
+        <div class="floating-actions" aria-label="Shortcuts">
+          <button id="floatingUndoBtn" type="button">Undo</button>
+          <button id="floatingStreamBtn" class="primary" type="button">Stream</button>
+        </div>
       </div>
     </main>
   </body>
