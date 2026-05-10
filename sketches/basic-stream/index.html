@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Basic Stream Sketch</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="panel">
+        <h1>Basic Stream Sketch</h1>
+        <p>Standalone sketch for streaming strokes into saxi.</p>
+        <div class="badges">
+          <span id="statusBadge" class="badge">socket: connecting</span>
+          <span id="paperBadge" class="badge">paper: 210 x 297 mm</span>
+        </div>
+        <div class="controls">
+          <button id="undoBtn" type="button">Undo</button>
+          <button id="clearBtn" type="button">Clear</button>
+          <button id="streamBtn" type="button" class="primary">Stream</button>
+          <label class="check"><input id="autoStream" type="checkbox" /> Auto stream</label>
+        </div>
+        <p id="statusText" class="status">Connecting...</p>
+      </section>
+      <section class="canvas-wrap">
+        <canvas id="canvas"></canvas>
+      </section>
+    </main>
+    <script type="module" src="./sketch.js"></script>
+  </body>
+</html>

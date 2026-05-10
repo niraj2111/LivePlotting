@@ -1,5 +1,3 @@
-import "./stream-input.css";
-
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const controlPanel = document.getElementById("controlPanel");
@@ -50,6 +48,8 @@ let lassoPoints = [];
 let transformState = null;
 const selectedStrokeIds = new Set();
 const svgUnitsPerMm = 96 / 25.4;
+const saxiHost = "127.0.0.1:9080";
+let nextStrokeId = 1;
 
 function fmt(n) {
   return Number(n)
@@ -70,6 +70,15 @@ function dist(a, b) {
 
 function lerp(a, b, t) {
   return { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t };
+}
+
+function makeStrokeId() {
+  if (globalThis.crypto && typeof globalThis.crypto.randomUUID === "function") {
+    return globalThis.crypto.randomUUID();
+  }
+  const id = nextStrokeId;
+  nextStrokeId += 1;
+  return `stroke-${id}`;
 }
 
 function brushSizeMm() {
@@ -549,7 +558,7 @@ function streamIfAutoEnabled() {
 
 function connect() {
   const protocol = location.protocol === "https:" ? "wss" : "ws";
-  socket = new WebSocket(protocol + "://" + location.host + "/chat");
+  socket = new WebSocket(`${protocol}://${saxiHost}/chat`);
   socket.addEventListener("open", () => {
     connected = true;
     updateBadges();
@@ -593,7 +602,7 @@ function connect() {
 }
 
 function beginStroke(point) {
-  current = { id: crypto.randomUUID(), points: [point], filtered: point };
+  current = { id: makeStrokeId(), points: [point], filtered: point };
   strokes.push(current);
 }
 
